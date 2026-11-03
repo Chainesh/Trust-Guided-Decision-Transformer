@@ -35,7 +35,7 @@ The second metric captures something the average score hides. Two policies with 
 
 ## Result 1: Execution-time selection
 
-![Execution-time selection strategies on Maze2D medium](figures/selection.png)
+![Execution-time selection strategies on Maze2D medium](folders/selection.png)
 
 *Figure 1. Comparison of execution-time selection strategies on Maze2D `medium`. Left: normalized D4RL score. Right: longest consecutive violation run.*
 
@@ -56,7 +56,7 @@ The second metric captures something the average score hides. Two policies with 
 
 ## Result 2: Training-side ablation
 
-![Training-side ablation on Maze2D medium](figures/ablation.png)
+![Training-side ablation on Maze2D medium](folders/ablation.png)
 
 *Figure 2. Ablation of training-side components on Maze2D `medium`. Left: normalized D4RL score. Right: longest consecutive violation run.*
 
