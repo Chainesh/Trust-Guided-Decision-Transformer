@@ -1,0 +1,6 @@
+dataset: halfcheetah-medium-replay-v2
+seeds: [107, 108, 109]
+include: [critics/iql_500k.yaml]
+train:
+  lambda_Q: 100.0
+  q_norm: once

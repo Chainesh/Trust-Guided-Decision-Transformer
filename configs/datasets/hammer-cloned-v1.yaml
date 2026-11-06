@@ -1,0 +1,6 @@
+dataset: hammer-cloned-v1
+seeds: [107, 108, 109]
+include: [critics/iql_500k.yaml]
+train:
+  lambda_Q: 2.5
+  q_norm: once

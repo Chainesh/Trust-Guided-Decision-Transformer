@@ -1,0 +1,3 @@
+critic:
+  steps: 500000
+  expectile: 0.9

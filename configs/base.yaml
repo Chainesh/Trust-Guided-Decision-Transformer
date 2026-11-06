@@ -1,0 +1,65 @@
+# Shared by every run: Table 2 of the paper, with the original Decision Transformer's training recipe where the paper
+# is silent. A dataset file (configs/datasets/<dataset>.yaml) overrides what it changes.
+
+model:
+  arch: gpt2              # gpt2: the original DT's GPT-2 block (pre-LN, ReLU MLP, final LN, N(0, 0.02) init)
+                          # mindt: min-decision-transformer's block (post-LN, GELU)
+  context_len: 20         # K
+  n_blocks: 3
+  embed_dim: 128
+  n_heads: 1
+  dropout: 0.1
+  activation: relu        # gpt2 only: DT's gym default
+  use_residual: true      # Eq. 2: a_hat = tanh(a_base + delta), delta = delta_max tanh(f(z))
+  delta_max: 0.05
+
+train:
+  batch_size: 64
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  warmup_steps: 10000
+  lr_schedule: constant   # constant (after warmup) | cosine
+  iters: 100              # x updates_per_iter = 100k updates
+  updates_per_iter: 1000
+  grad_clip: 0.25
+  beta: 0.05              # Eq. 3: weight of ||delta||^2
+  lambda_s: 1.0           # Eq. 5: weight of the next-state loss
+  lambda_Q: 0.01          # Eq. 3. With q_norm: once, this is c and lambda_Q = c / mean|Q(s, a)| over the data,
+  q_norm: none            #   computed once before training and then fixed (Eq. 3 unchanged: lambda_Q is a constant)
+  adv_weights: false      # Eq. 3's optional w_t = exp(adv_beta z) / mean, z the batch-standardized Q - V, capped at 20
+  adv_beta: 1.0
+  loss_reduction: sum     # squared norms summed over action dimensions, as written in Eq. 3
+  sample_by_length: false # trajectories drawn uniformly (min-DT); true: in proportion to length (original DT)
+  ema_decay: null         # e.g. 0.9995: an average of the weights kept beside training (training itself unchanged)
+
+critic:                   # the frozen IQL critic Q_phi of Eqs. 3 and 11
+  steps: 20000
+  expectile: 0.7
+  reward_shift: 0.0
+  reward_norm: false
+  gamma: 0.99
+  batch: 256
+  lr: 3.0e-4
+  polyak: 0.005
+  layers: 2
+  layer_norm: false
+
+data:
+  protocol: episodes      # episodes | stream (maze2d)
+
+returns:
+  rule: dt                # locomotion: DT's targets (hopper 3600, walker2d 5000, halfcheetah 12000) and scale 1000;
+                          # elsewhere: target = D4RL's reference max score, scale = 10^floor(log10(ref max))
+  target: null            # null: the rule's target; a number; 'x<F>': F x reference max; 'data max'
+
+eval:
+  episodes: 100
+  Ke: 10                  # Eq. 6: window of the rolling error
+  alpha: 0.05             # Eq. 7: tau = the 95th percentile of held-out rolling errors
+  tau_mode: shared        # shared: the full context's tau for every suffix | per_suffix
+  suffixes: [1, 5, 10, 20]
+  selection: paper        # paper (Eq. 11) | critic only | full context | hard reset
+  hard_reset_cooldown: 10
+  weights: raw            # raw | ema (needs train.ema_decay)
+
+seeds: [104, 105, 106]

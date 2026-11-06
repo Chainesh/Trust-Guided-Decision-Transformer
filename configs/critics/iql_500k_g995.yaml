@@ -1,0 +1,3 @@
+critic:
+  steps: 500000
+  gamma: 0.995

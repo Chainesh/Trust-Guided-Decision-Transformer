@@ -1,0 +1,6 @@
+dataset: antmaze-umaze-diverse-v0
+seeds: [104, 105, 106]
+include: [critics/iql_500k_antmaze.yaml]
+train:
+  lambda_Q: 40.0
+  q_norm: once

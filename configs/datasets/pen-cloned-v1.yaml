@@ -1,0 +1,7 @@
+dataset: pen-cloned-v1
+seeds: [110, 111, 112]
+include: [critics/iql_500k_e09.yaml]
+train:
+  lambda_Q: 0.5
+  q_norm: once
+  adv_weights: true

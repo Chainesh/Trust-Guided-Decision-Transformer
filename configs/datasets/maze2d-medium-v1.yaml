@@ -1,0 +1,9 @@
+dataset: maze2d-medium-v1
+seeds: [104, 105, 106]
+include: [critics/iql_500k_e09.yaml]
+train:
+  lambda_Q: 10.0
+  q_norm: once
+  adv_weights: true
+data:
+  protocol: stream

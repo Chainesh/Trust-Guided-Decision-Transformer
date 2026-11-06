@@ -1,0 +1,6 @@
+dataset: door-human-v1
+seeds: [107, 108, 109]
+include: [critics/iql_500k.yaml]
+train:
+  lambda_Q: 0.1
+  q_norm: once

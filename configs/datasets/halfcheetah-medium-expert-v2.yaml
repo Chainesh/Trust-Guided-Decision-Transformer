@@ -1,0 +1,6 @@
+dataset: halfcheetah-medium-expert-v2
+seeds: [107, 108, 109]
+include: [critics/iql_500k.yaml]
+train:
+  lambda_Q: 5.0
+  q_norm: once

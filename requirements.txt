@@ -1,0 +1,4 @@
+numpy
+torch
+pyyaml
+# gym, d4rl, mujoco_py: as installed for D4RL

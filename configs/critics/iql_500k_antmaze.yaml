@@ -1,0 +1,5 @@
+# IQL's antmaze recipe: expectile 0.9, reward - 1
+critic:
+  steps: 500000
+  expectile: 0.9
+  reward_shift: -1.0

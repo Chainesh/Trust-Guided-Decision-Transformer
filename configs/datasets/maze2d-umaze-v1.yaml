@@ -1,0 +1,10 @@
+dataset: maze2d-umaze-v1
+seeds: [107, 108, 109]
+include: [critics/iql_500k_e09.yaml]
+train:
+  lambda_Q: 10.0
+  q_norm: once
+data:
+  protocol: stream
+returns:
+  target: x3

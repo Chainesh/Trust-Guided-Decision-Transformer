@@ -1,0 +1,6 @@
+dataset: hopper-medium-v2
+seeds: [107, 108, 109]
+include: [critics/iql_500k_g995.yaml]
+train:
+  lambda_Q: 25.0
+  q_norm: once

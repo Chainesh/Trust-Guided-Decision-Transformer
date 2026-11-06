@@ -1,0 +1,8 @@
+dataset: hopper-medium-replay-v2
+seeds: [107, 108, 109]
+include: [critics/iql_500k.yaml]
+train:
+  lambda_Q: 50.0
+  q_norm: once
+returns:
+  target: 4042.875
