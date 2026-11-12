@@ -67,11 +67,3 @@ Read together, the two experiments separate two roles:
 
 The full model without any execution-time selection scores 56.7, and the *No selection* baseline in Figure 1 scores 56.3. This suggests that the Figure 1 baseline is the full trained model before trust filtering is applied.
 
-
----
-
-## Notes on the figures
-
-- The bars show mean values and the error bars show variability across runs.
-  > **TODO (authors):** state the number of seeds and whether the error bars are std or a confidence interval.
-- The boxed values mark the proposed method in each panel.
